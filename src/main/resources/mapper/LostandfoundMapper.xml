@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swzl.mapper.LostandfoundMapper">
+
+    <resultMap id="BaseResultMap" type="com.swzl.entity.Lostandfound">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userid" column="userid" jdbcType="INTEGER"/>
+            <result property="lostorfound" column="lostorfound" jdbcType="INTEGER"/>
+            <result property="itemname" column="itemname" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="location" column="location" jdbcType="VARCHAR"/>
+            <result property="imagepath" column="imagepath" jdbcType="VARCHAR"/>
+            <result property="claimed" column="claimed" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userid,lostorfound,
+        itemname,description,location,
+        imagepath,claimed
+    </sql>
+    <select id="pageCC" resultType="com.swzl.entity.Lostandfound">
+        select * from lostandfound ${ew.customSqlSegment}
+    </select>
+
+    <update id="updateClaimedById">
+        UPDATE lostandfound
+        SET claimed = #{claimedUserId}
+        WHERE id = #{id}
+    </update>
+</mapper>
